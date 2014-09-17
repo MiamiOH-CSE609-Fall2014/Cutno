@@ -27,8 +27,8 @@ int main(){
 	int M1 [m1col][m1row];
 	int M2 [m2col][m2row];
 	int M3 [m1col][m2row];
-	for(int i = 0; i < m1row; i++){
-		for(int j = 0; j < m1col; j++){
+	for(int i = 0; i < m1col; i++){
+		for(int j = 0; j < m2row; j++){
 			M3[i][j] = 0;
 		}
 	}
@@ -52,8 +52,8 @@ int main(){
 	// Math
 	for(int i = 0; i < m1row; i++){
 		for(int j = 0; j < m2col; j++){
-			for(int k = 0; k < m1col; k++){
-				M3[i][j] += M1[i][k] * M2[k][j]
+			for(int k = 0; k < m2row; k++){
+				M3[i][j] += M1[i][k] * M2[k][j];
 			}
 		}
 	}
@@ -77,6 +77,15 @@ int main(){
                 }
                 cout << "\n";
         }
+	
+	cout << "\n";
+	for(int y = 0; y < m1row; y++){
+               for(int x = 0; x < m2col; x++){
+                       cout <<  M3[x][y] << " ";
+               }
+               cout << "\n";
+        }
+
 	
 	return 0;
 }
