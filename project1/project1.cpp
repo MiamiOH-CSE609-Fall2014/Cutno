@@ -53,9 +53,7 @@ int main(){
 	for(int i = 0; i < m1row; i++){
 		for(int j = 0; j < m1col; j++){
 			for(int k = 0; k < m2col; k++){
-				cout << k << ", " << i <<" " << M3[k][i];
 				M3[k][i] += M1[j][i] * M2[k][j];
-				cout << " + (" << M1[j][i] << " * " << M2[k][j] << ") = " << M3[k][i] << "\n";
 			}
 		}
 	}
@@ -81,6 +79,7 @@ int main(){
         }
 	
 	cout << "\n";
+	// Print matrix 3
 	for(int y = 0; y < m1row; y++){
                for(int x = 0; x < m2col; x++){
                        cout <<  M3[x][y] << " ";
