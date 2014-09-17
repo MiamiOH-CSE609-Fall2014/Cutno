@@ -26,6 +26,12 @@ int main(){
 	// Init. matrix 1 & 2
 	int M1 [m1col][m1row];
 	int M2 [m2col][m2row];
+	int M3 [m1col][m2row];
+	for(int i = 0; i < m1row; i++){
+		for(int j = 0; j < m1col; j++){
+			M3[i][j] = 0;
+		}
+	}
 
 	// Fill matrix 1
 	cout << "Enter values for matrix 1 (one at a time)\n";
@@ -43,7 +49,14 @@ int main(){
                 }
         }
 
-
+	// Math
+	for(int i = 0; i < m1row; i++){
+		for(int j = 0; j < m2col; j++){
+			for(int k = 0; k < m1col; k++){
+				M3[i][j] += M1[i][k] * M2[k][j]
+			}
+		}
+	}
 
 	// Print responses
 	cout << "\n--Output--\n";
