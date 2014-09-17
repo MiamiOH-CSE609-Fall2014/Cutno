@@ -3,7 +3,6 @@ using namespace std;
 
 //Matrix sizes
 int m1row, m1col, m2row, m2col;
-string m1 = "", m2 = "", m3 = "";
 
 int main(){
 	// Row & Col input
