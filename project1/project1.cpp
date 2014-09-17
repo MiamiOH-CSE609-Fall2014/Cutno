@@ -26,9 +26,9 @@ int main(){
 	// Init. matrix 1 & 2
 	int M1 [m1col][m1row];
 	int M2 [m2col][m2row];
-	int M3 [m1col][m2row];
-	for(int i = 0; i < m1col; i++){
-		for(int j = 0; j < m2row; j++){
+	int M3 [m2col][m1row];
+	for(int i = 0; i < m2col; i++){
+		for(int j = 0; j < m1row; j++){
 			M3[i][j] = 0;
 		}
 	}
@@ -51,9 +51,11 @@ int main(){
 
 	// Math
 	for(int i = 0; i < m1row; i++){
-		for(int j = 0; j < m2col; j++){
-			for(int k = 0; k < m2row; k++){
-				M3[i][j] += M1[i][k] * M2[k][j];
+		for(int j = 0; j < m1col; j++){
+			for(int k = 0; k < m2col; k++){
+				cout << k << ", " << i <<" " << M3[k][i];
+				M3[k][i] += M1[j][i] * M2[k][j];
+				cout << " + (" << M1[j][i] << " * " << M2[k][j] << ") = " << M3[k][i] << "\n";
 			}
 		}
 	}
