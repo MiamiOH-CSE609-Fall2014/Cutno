@@ -15,7 +15,7 @@ int main(){
 
 	// Proper sizes check
 	if(m1col != m2row){
-		//cout << "Cols of matrix 1 must match Rows of matrix 2. Try again.\n";
+		cout << "Cols of matrix 1 must match Rows of matrix 2. Try again.\n";
 		return 1;
 	}
 	
