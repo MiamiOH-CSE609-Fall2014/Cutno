@@ -23,6 +23,11 @@ int main(){
 	//cout << "Enter the number of COLs for matrix 2: ";
 	cin >> m2col;
 
+	if(m1col < 1 | m1row < 1 | m2col < 1 | m2row < 1){
+		cout << "dimentions should be at least 1\n";
+		return 1;
+	}
+
 	// Init. matrix 1 & 2
 	int M1 [m1col][m1row];
 	int M2 [m2col][m2row];
