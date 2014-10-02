@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<stdexcept>
+#include<cstdlib>
 #include<string>
 using namespace std;
 
@@ -8,14 +9,16 @@ vector<string> names;
 vector<double> grades;
 int vecIndex = 0;
 
-string tempName = "";
+string tempName  = "";
 double tempGrade = -1;
 
 void getNamesGrades(){
 	//Loop inputs
         while(true){
                 try{
-                        //get name
+                        tempName = "";
+			tempGrade = -1;
+			//get name
                         cout << vecIndex << ")\tEnter name:\t";
                         getline(cin, tempName);
                         //do possible check for empty string here
@@ -28,11 +31,16 @@ void getNamesGrades(){
                         //get grade
                         cout << "\tEnter grade:\t";
                         cin >> tempGrade;
-			cin.ignore();
-			
+			if(cin.fail()){
+				cin.clear();
+                        	cin.ignore(80, '\n');
+				throw out_of_range("A string is not a valid input");
+			}
+			cin.ignore();			
+
                         //check if valid grade
                         if(tempGrade < 0.0 || tempGrade > 100.0){
-                                throw out_of_range("Invalid grade input");
+                                throw out_of_range("Grades must be between 0.0 and 100.0");
                         }
 
                         //save name and grade
@@ -41,11 +49,8 @@ void getNamesGrades(){
                         vecIndex++;
                 }
                 catch(out_of_range e){
-                        cout << e.what() << ":\tRedo input for this student\n";
+                        cout << e.what() << ":\tRedo input for this student\n\n";
                 }
-		catch(exception ex){
-			cout << "Unknown error with input\n";
-		}
         }
 
 }
