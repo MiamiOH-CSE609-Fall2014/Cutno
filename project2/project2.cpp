@@ -3,6 +3,7 @@
 #include<stdexcept>
 #include<cstdlib>
 #include<string>
+#include<math.h>
 using namespace std;
 
 vector<string> names;
@@ -10,7 +11,9 @@ vector<double> grades;
 int vecIndex = 0;
 
 string tempName  = "";
-double tempGrade = -1;
+double tempGrade = -1.0;
+double average = 0.0;
+double deviation = 0.0;
 
 void getNamesGrades(){
 	//Loop inputs
@@ -61,6 +64,19 @@ int main (){
 	//get inputs
 	getNamesGrades();
 	
+	//clculate average grade
+	for(int i = 0; i < grades.size(); i++){
+		average += grades[i];
+	}
+	average = average/grades.size();
+	
+	//clculate standard deviation
+	for(int i = 0; i < grades.size(); i++){
+		deviation += pow( (grades[i] - average), 2.0);
+	}
+	deviation = sqrt(deviation/grades.size());	
+
+
 	for(int i = 0; i < names.size(); i++){
 		cout << names[i] << "\t" << grades[i] << "\n";
 	}	
