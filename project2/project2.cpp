@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<string>
 #include<math.h>
+#include<stdio.h>
 using namespace std;
 
 vector<string> names;
@@ -12,6 +13,7 @@ vector<char> letterGrade;
 int vecIndex = 0;
 
 string tempName  = "";
+string tempLetter = "";
 double tempGrade = -1.0;
 double average = 0.0;
 double deviation = 0.0;
@@ -90,17 +92,17 @@ void printScale(){
 	cout << "\n\n";
 	cout << "Grading scale" << endl;
 	if(average+(1.5*deviation) > 100)
-		cout << "A above 100%" << endl;
+		cout << "A above 100.0%" << endl;
 	else
-		cout << "A above " << average+(1.5*deviation) << "%" << endl;
-	cout << "B " << average+(.5*deviation) << "% - " << average+(1.5*deviation) << "%" << endl;
-	cout << "C " << average+(-.5*deviation) << "% - " << average+(.5*deviation) << "%" << endl;
-	cout << "D " << average+(-1.5*deviation) << "% - " << average+(-.5*deviation) << "%" << endl;
-	cout << "F below " << average+(-1.5*deviation) << "%\n" << endl;
+		printf("A above %.1f%%\n",(average+(1.5*deviation)));
+	printf("B %.1f%% - %.1f%%\n",(average+(.5*deviation)), (average+(1.5*deviation)));
+	printf("C %.1f%% - %.1f%%\n",(average+(-.5*deviation)), (average+(.5*deviation)));
+	printf("D %.1f%% - %.1f%%\n",(average+(-1.5*deviation)), (average+(-.5*deviation)));
+	printf("F below %.1f%%\n\n", ( average+(-1.5*deviation)));
 }
 
 int main (){
-	cout << "Welcome to the grade curve system.\nEnter students full name followed by the grade earned.\nEnter lowercase <quit> as a name to stop taking input.\n\n";
+	cout << "\n\nWelcome to the grade curve system.\nEnter students full name followed by the grade earned.\nEnter lowercase <quit> as a name to stop taking input.\n\n";
 	
 	//get inputs
 	getNamesGrades();
@@ -117,9 +119,15 @@ int main (){
 	}
 
 	//print
+	printf("   Name\t\t\t\t Score\t\tGrade\n");
 	for(int i = 0; i < names.size(); i++){
-		cout << names[i] << "\t" << grades[i] << "\t" << letterGrade[i] << "\n";
+		tempName = names[i];
+		tempLetter = letterGrade[i];
+		printf("%d. %-30s%.1f%%\t\t%s\n",i+1, tempName.c_str(), grades[i], tempLetter.c_str());
+	//	cout << names[i] << "\t\t" << grades[i] << "\t" << letterGrade[i] << "\n";
 	}	
+	
+	printf("\nClass Average \t=\t%.2f%%\nStandard Deviation =\t%.2f\n\n", average, deviation);
 
 	return 0;
 }
