@@ -30,7 +30,7 @@ void getNamesGrades(){
                         //do possible check for empty string here
 
                         //stop taking input - break loop
-                        if(tempName.compare("quit") == 0 ){
+                        if(tempName.compare("none") == 0 ){
                                 break;
                         }
 
