@@ -56,6 +56,48 @@ map< string, int > digramFreqScores(string s){
 	return scores;
 }
 
+vector< vector<int> > digramFreqMatrix( map< string, int > scoreMap){
+	vector< vector<int> > m;
+	vector<int> temp;
+	int index = 0;
+	for(int i = 0; i < 16; i++){		
+		temp.push_back(scoreMap[digrams[i]]);
+                index++;
+
+		if(index == 4){
+                        m.push_back(temp);
+                        index = 0;
+                        temp.clear();
+                }
+
+//                cout << digrams[i] << " " << scoreMap[digrams[i]] << endl;
+        }
+	return m;
+}
+
+vector< vector<int> > parseScoringFile(string filepath){
+	vector< vector<int> > scoreMat;
+	vector<int> temp;
+	string tempString = "";
+        ifstream file(filepath);
+
+	while(file.good()){
+		temp.clear();
+		getline(file, tempString);
+		int current;
+		int next = -1;
+
+		do{
+			current = next+1;
+			next = tempString.find_first_of(',', current);
+			temp.push_back(atoi(tempString.substr(current, next-current).c_str()));
+		}
+		while(next != string::npos);
+		if(scoreMat.size() < 3)
+			scoreMat.push_back(temp);
+        }
+	return scoreMat;
+}
 
 
 int main(){
@@ -73,6 +115,33 @@ int main(){
 */
 
 	map< string, int > scoreMap = digramFreqScores(get<2>(parsed));
+/*	
+	for(int i = 0; i < 16; i++){
+		cout << digrams[i] << " " << scoreMap[digrams[i]] << endl;
+	}
+*/
+
+	vector< vector<int> > scoreMatrix = digramFreqMatrix(scoreMap);
+/*	
+	for(int first = 0; first < scoreMatrix.size(); first++){
+		for(int second = 0; second < scoreMatrix[first].size(); second++){
+			cout << scoreMatrix[first][second] << " ";
+		}
+		cout << endl;
+	}	
+*/
+
+	cout << "Enter .csv file name: ";
+	cin >> file2;
+	vector< vector<int> > scoringMat = parseScoringFile(file2);
+/*
+	for(int first = 0; first < scoringMat.size(); first++){
+                for(int second = 0; second < scoringMat[first].size(); second++){
+                        cout << scoringMat[first][second] << " ";
+                }
+                cout << endl;
+        }
+*/
 
 	return 0;
 }
