@@ -134,14 +134,14 @@ int main(){
 	cout << "Enter .csv file name: ";
 	cin >> file2;
 	vector< vector<int> > scoringMat = parseScoringFile(file2);
-/*
+
 	for(int first = 0; first < scoringMat.size(); first++){
                 for(int second = 0; second < scoringMat[first].size(); second++){
                         cout << scoringMat[first][second] << " ";
                 }
                 cout << endl;
         }
-*/
+
 
 	return 0;
 }
