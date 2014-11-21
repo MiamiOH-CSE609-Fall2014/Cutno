@@ -110,15 +110,12 @@ void guessV(){
 	cin >> voul;
 	transform(voul.begin(), voul.end(), voul.begin(), ::toupper);
 
-	if(voul.size() == 1 && voul!= "A" && voul== "E" && voul== "I" && voul== "O" && voul== "Y"){
-		find(cons);
+	if(voul.size() == 1 && (voul == "A" || voul == "E" || voul== "I" || voul== "O" || voul== "Y")){
+		find(voul);
 	}
 	else{
 		cout << "Invalid input! Your turn was skipped!" << endl;
 	}
-
-	find(voul);
-	
 }
 
 void guessC(){
@@ -137,11 +134,30 @@ void guessC(){
 }
 
 void guessSen(){
-	
+	cout << "Enter your guess: ";
+	string sen;
+	getline(cin, sen);
+	getline(cin, sen);
+	transform(sen.begin(), sen.end(), sen.begin(), ::toupper);
 
-	cout << "You guessed wrong, lost all of your winnings and the game!" << endl;
+	string temp;
+
+	if(sen == sentence){
+		int count = 0;
+		for(string::iterator it= currentSentence.begin(); it!=currentSentence.end(); it++){
+               		temp = *it;
+			if(temp == "_"){
+				count++;
+			}
+        	}
+		bank += count * spinvalue;
+		cout << "\nYou uncovered " << count << " spaces!\nBank = $" << bank << endl << sentence << endl;
+	}
+	else{
+		cout << "You guessed wrong, lost all of your winnings and the game!" << endl;
+		bank = 0;
+	}
 	pickSentence();
-	bank = 0;
 }
 
 void guess(){
