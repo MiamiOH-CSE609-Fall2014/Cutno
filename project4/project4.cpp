@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <time.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -50,6 +51,7 @@ void loadFile(){
 		cout << endl;
 	}
 */
+	file.close();
 }
 
 void pickSentence(){
@@ -126,6 +128,13 @@ void guessC(){
 
 	if(cons.size() == 1 && cons != "A" && cons != "E" && cons != "I" && cons != "O" && cons != "Y"){
 		find(cons);
+
+		cout << "Do you want to try and guess the sentence? (y/n) ";
+		cin >> temp;
+	
+		if(temp == "y" || temp == "Y"){
+			guessSen();
+		}
 	}
 	else{
 		cout << "Invalid input! Your turn was skipped!" << endl;
@@ -152,6 +161,13 @@ void guessSen(){
         	}
 		bank += count * spinvalue;
 		cout << "\nYou uncovered " << count << " spaces!\nBank = $" << bank << endl << sentence << endl;
+	
+		cout << "Do you want to try and guess the sentence? (y/n) ";
+		cin >> temp;
+	
+		if(temp == "y" || temp == "Y"){
+			guessSen();
+		}
 	}
 	else{
 		cout << "You guessed wrong, lost all of your winnings and the game!" << endl;
@@ -176,13 +192,41 @@ void guess(){
 	}
 	else
 		guessC();
+}
 
-	cout << "Do you want to try and guess the sentence? (y/n) ";
-	cin >> temp;
-	
-	if(temp == "y" || temp == "Y"){
-		guessSen();
+string name(){
+	cout << "\n\nYou beat the current high score!" << endl;
+	cout << "Enter your name to let the world know: ";
+	string input;
+	getline(cin, input);
+	getline(cin, input);
+	return input;
+}
+
+void newScore(){
+	ofstream newFile("temp.txt");
+	if(newFile.is_open()){
+		newFile<< name();
+		newFile<< "\n";
+		newFile<< to_string(bank);
+		newFile<< "\n";
+
+		string dataTemp;
+		int i = 0;
+		ifstream myfile("data.txt");
+		if(myfile.is_open()){
+			while(getline(myfile, dataTemp)){
+				if(i > 1){
+					newFile<< dataTemp;
+					newFile<< "\n";
+				}
+				i++;		
+			}
+			myfile.close();
+		}
+		newFile.close();
 	}
+	else cout << "Unable to open file";
 }
 
 int main(){
@@ -216,8 +260,9 @@ int main(){
 		cout << "\nQuit? (y/n) ";
 		cin >> quit;
 
-		//if((quit == "y" || quit == "Y") && bank >= highScore)
-//record high score code function	
+		if((quit == "y" || quit == "Y") && bank >= highScore){
+			newScore();
+		}
 
 	}while(quit != "y");
 	
