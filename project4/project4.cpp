@@ -120,28 +120,6 @@ void guessV(){
 	}
 }
 
-void guessC(){
-	cout << "Enter a consonant: ";
-	string cons;
-	cin >> cons;
-	transform(cons.begin(), cons.end(), cons.begin(), ::toupper);
-
-	if(cons.size() == 1 && cons != "A" && cons != "E" && cons != "I" && cons != "O" && cons != "Y"){
-		find(cons);
-
-		cout << "Do you want to try and guess the sentence? (y/n) ";
-		cin >> temp;
-	
-		if(temp == "y" || temp == "Y"){
-			guessSen();
-		}
-	}
-	else{
-		cout << "Invalid input! Your turn was skipped!" << endl;
-	}
-	
-}
-
 void guessSen(){
 	cout << "Enter your guess: ";
 	string sen;
@@ -161,7 +139,26 @@ void guessSen(){
         	}
 		bank += count * spinvalue;
 		cout << "\nYou uncovered " << count << " spaces!\nBank = $" << bank << endl << sentence << endl;
-	
+	}
+	else{
+		cout << "You guessed wrong, lost all of your winnings and the game!" << endl;
+		bank = 0;
+	}
+	pickSentence();
+}
+
+
+void guessC(){
+	cout << "Enter a consonant: ";
+	string cons;
+	cin >> cons;
+	transform(cons.begin(), cons.end(), cons.begin(), ::toupper);
+
+	string temp;
+
+	if(cons.size() == 1 && cons != "A" && cons != "E" && cons != "I" && cons != "O" && cons != "Y"){
+		find(cons);
+
 		cout << "Do you want to try and guess the sentence? (y/n) ";
 		cin >> temp;
 	
@@ -170,10 +167,9 @@ void guessSen(){
 		}
 	}
 	else{
-		cout << "You guessed wrong, lost all of your winnings and the game!" << endl;
-		bank = 0;
+		cout << "Invalid input! Your turn was skipped!" << endl;
 	}
-	pickSentence();
+	
 }
 
 void guess(){
@@ -225,6 +221,21 @@ void newScore(){
 			myfile.close();
 		}
 		newFile.close();
+
+	if( remove( "data.txt" ) != 0 )
+    		perror( "Error deleting file" );
+  	else
+    		puts( "Successfully removed old high score" );
+
+	int result;
+  	char oldname[] ="temp.txt";
+  	char newname[] ="data.txt";
+  	result= rename( oldname , newname );
+  	if ( result == 0 )
+    		puts ( "Successfully added new high score" );
+  	else
+    		perror( "Error renaming file" );
+
 	}
 	else cout << "Unable to open file";
 }
